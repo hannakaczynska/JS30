@@ -74,7 +74,7 @@ const hourHand = document.querySelector('.hour-hand');
 const minutesHand = document.querySelector('.min-hand');
 const secondesHand = document.querySelector('.second-hand');
 
-function getTime() {
+const getTime = () => {
   let actualDate = new Date();
   const hours = actualDate.getHours() % 12 || 12;
   const minutes = actualDate.getMinutes();
@@ -82,7 +82,7 @@ function getTime() {
   return {hours, minutes, seconds};
 }
 
-function setTimer({hours, minutes, seconds}) {
+const setTimer = ({hours, minutes, seconds}) => {
   let hourSetting = 90 + hours * 30;
   let minuteSetting = 90 + minutes * 6;
   let secondSetting = 90 + seconds * 6;
@@ -91,7 +91,7 @@ function setTimer({hours, minutes, seconds}) {
   secondesHand.style.transform = `rotate(${secondSetting}deg)`;
 }
 
-function changeTimer() {
+const changeTimer = () => {
 let timeData = getTime();
 setTimer(timeData);
 }
