@@ -59,7 +59,43 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+const qs = (s) => document.querySelector(s);
 
+window.addEventListener('keydown', (e) => {
+  audio = qs(`audio[data-key="${e.keyCode}"]`);
+  key = qs(`div[data-key="${e.keyCode}"]`);
+  if (!audio) {
+    return
+  } else {
+  audio.currentTime = 0;
+  audio.play();
+  key.classList.add('playing');
+}
+});
+
+window.addEventListener('keyup', (e) => {
+   key = qs(`div[data-key="${e.keyCode}"]`);
+   if (!key) {
+    return
+   } else { key.classList.remove('playing');}
+  });
+
+
+// mouse click on the buttons
+
+//mousedown
+// const keys = document.querySelectorAll('.key');
+// keys.forEach(key => key.addEventListener('mousedown', (e) => {
+//     e.keyCode.classList.add('playing');
+//     console.log(e.currentTarget);
+//   }));
+
+//mouseup
+// keys.forEach(key => key.addEventListener('mouseup', (e) => {
+//       e.currentTarget.classList.remove('playing');
+//     }));
+
+    
 </script>
 
 
