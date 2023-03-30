@@ -70,9 +70,11 @@
   </style>
 
   <script>
-const hourHand = document.querySelector('.hour-hand');
-const minutesHand = document.querySelector('.min-hand');
-const secondesHand = document.querySelector('.second-hand');
+const qs = (s) => document.querySelector(s);
+
+const hourHand = qs('.hour-hand');
+const minutesHand = qs('.min-hand');
+const secondesHand = qs('.second-hand');
 
 const getTime = () => {
   let actualDate = new Date();
@@ -91,12 +93,11 @@ const setTimer = ({hours, minutes, seconds}) => {
   secondesHand.style.transform = `rotate(${secondSetting}deg)`;
 }
 
-const changeTimer = () => {
-let timeData = getTime();
-setTimer(timeData);
-}
-
-setInterval(changeTimer, 1000);
+setInterval(() => {
+    let timeData = getTime();
+    setTimer(timeData);
+  }, 1000);
+  
   </script>
 </body>
 </html>
