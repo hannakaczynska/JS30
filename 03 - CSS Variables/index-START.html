@@ -23,6 +23,21 @@
 
   <style>
 
+:root {
+  --base-color: #ffc600;
+  --padding-width: 10px;
+  --blur: 10px;
+}
+
+img {
+  padding: var(--padding-width);
+  background-color: var(--base-color);
+  filter: blur(var(--blur));
+}
+
+.hl {
+  color: var(--base-color);
+}
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -46,6 +61,34 @@
   </style>
 
   <script>
+ const qs = (s) => document.querySelector(s);   
+
+const spacingInput = qs('#spacing');
+const blurInput = qs('#blur');
+const colorInput = qs('#base');
+const image = qs('img');
+const colorTitle = qs('.hl');
+
+const changeImageSpacing = (e) => {
+let inputValue = e.currentTarget.value + "px";
+image.style.padding = inputValue;
+}
+
+const changeImageBlur = (e) => {
+  let inputValue = e.currentTarget.value + "px";
+  image.style.filter = `blur(${inputValue})`;
+}
+
+const changeColor = (e) => {
+  let inputValue = e.currentTarget.value;
+  image.style.backgroundColor = inputValue;
+  colorTitle.style.color = inputValue;
+}
+
+spacingInput.addEventListener('input', changeImageSpacing);
+blurInput.addEventListener('input', changeImageBlur);
+colorInput.addEventListener('input', changeColor);
+
   </script>
 
 </body>
