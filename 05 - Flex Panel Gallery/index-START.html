@@ -27,6 +27,7 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display: flex;
     }
 
     .panel {
@@ -34,7 +35,6 @@
       box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
       color: white;
       text-align: center;
-      align-items: center;
       /* Safari transitionend event.propertyName === flex */
       /* Chrome + FF transitionend event.propertyName === flex-grow */
       transition:
@@ -44,6 +44,12 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
     .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
@@ -72,6 +78,25 @@
 
     .panel.open {
       font-size: 40px;
+      width: 80%;
+    }
+
+    .up {
+      position: absolute;
+      top: -50%;
+    }
+
+   .open > .up {
+      top: 13%;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: -50%;
+    }
+
+    .open > .bottom {
+      bottom: 13%;
     }
 
   </style>
@@ -79,33 +104,53 @@
 
   <div class="panels">
     <div class="panel panel1">
-      <p>Hey</p>
-      <p>Let's</p>
-      <p>Dance</p>
+      <p class="up">Hey</p>
+      <p class="center">Let's</p>
+      <p class="bottom">Dance</p>
     </div>
     <div class="panel panel2">
-      <p>Give</p>
-      <p>Take</p>
-      <p>Receive</p>
+      <p class="up">Give</p>
+      <p class="center">Take</p>
+      <p class="bottom">Receive</p>
     </div>
     <div class="panel panel3">
-      <p>Experience</p>
-      <p>It</p>
-      <p>Today</p>
+      <p class="up">Experience</p>
+      <p class="center">It</p>
+      <p class="bottom">Today</p>
     </div>
     <div class="panel panel4">
-      <p>Give</p>
-      <p>All</p>
-      <p>You can</p>
+      <p class="up">Give</p>
+      <p class="center">All</p>
+      <p class="bottom">You can</p>
     </div>
     <div class="panel panel5">
-      <p>Life</p>
-      <p>In</p>
-      <p>Motion</p>
+      <p class="up">Life</p>
+      <p class="center">In</p>
+      <p class="bottom">Motion</p>
     </div>
   </div>
 
   <script>
+const panels = document.querySelector('.panels');
+const panel = document.querySelectorAll('.panel');
+
+const delateClass = () => {
+  panel.forEach(p => {
+    if (!p.classList.contains('open')) {
+      return;
+    }
+    p.classList.remove('open');
+  });
+};
+
+const openBigPanel = (e) => {
+delateClass();
+const clickedPanel = e.target;
+clickedPanel.classList.add('open');
+console.log(clickedPanel);
+}
+
+panels.addEventListener('click', openBigPanel);
 
   </script>
 
