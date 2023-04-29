@@ -16,8 +16,35 @@
     </ul>
   </form>
 <script>
+const searchInput = document.querySelector('.search');
+const list = document.querySelector('.suggestions');
+
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+const createCountryList = (countries) => {
+let searched = searchInput.value.trim().toLowerCase();
+  const countryList = countries
+    .map(country => { 
+    if(country.state.toLowerCase().includes(searched) || country.city.toLowerCase().includes(searched)) 
+    {return `<li>${country.city}, ${country.state}<span>${country.population}</span></li>`}})    
+    .join("");
+list.innerHTML = countryList;
+};
+
+
+const fetchCityOrState = () => {
+fetch(endpoint)
+.then(response => { 
+  if (!response.ok) {
+    throw new Error(response.status);
+  }
+    return response.json();
+  })
+.then(countries => createCountryList(countries))
+.catch(error => console.log(error))
+}
+
+searchInput.addEventListener('input', fetchCityOrState);
 </script>
 </body>
 </html>
